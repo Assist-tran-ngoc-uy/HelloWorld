@@ -11,7 +11,7 @@ $time = date('Y-m-d H:i:s');
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>PHP 7.2 Apache Docker</title>
+    <title>Ngocuy dep trai</title>
 </head>
 <body>
     <h1><?= htmlspecialchars($message, ENT_QUOTES, 'UTF-8') ?></h1>
