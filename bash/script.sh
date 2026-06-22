@@ -20,19 +20,6 @@ if [ ! -d ".git" ]; then
     exit 1
 fi
 
-git fetch origin "${BRANCH}"
-git reset --hard "origin/${BRANCH}"
-
-# Fix permission for Apache
-sudo chown -R apache:apache "${APP_DIR}" 2>/dev/null || sudo chown -R www-data:www-data "${APP_DIR}" 2>/dev/null || true
-sudo find "${APP_DIR}" -type d -exec chmod 755 {} \;
-sudo find "${APP_DIR}" -type f -exec chmod 644 {} \;
-
-# Reload Apache
-if systemctl list-unit-files | grep -q '^httpd.service'; then
-    sudo systemctl reload httpd || sudo systemctl restart httpd
-elif systemctl list-unit-files | grep -q '^apache2.service'; then
-    sudo systemctl reload apache2 || sudo systemctl restart apache2
-fi
+git pull origin "${BRANCH}"
 
 echo "Deploy completed."
