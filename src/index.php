@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 date_default_timezone_set('Asia/Tokyo');
 
-$message = 'Ngocuy dep trai';
+$message = 'Ngocuy dep trai 123123';
 $phpVersion = PHP_VERSION;
 $time = date('Y-m-d H:i:s');
 ?>
