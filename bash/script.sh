@@ -4,7 +4,7 @@ set -e
 APP_DIR="/var/www/html/HelloWorld"
 BRANCH="main"
 
-echo "Start git pull deploys1..."
+echo "Start git pull deploys2..."
 echo "App directory: ${APP_DIR}"
 echo "Branch: ${BRANCH}"
 
