@@ -12,7 +12,7 @@ if [ ! -d "${APP_DIR}" ]; then
     echo "ERROR: App directory does not exist: ${APP_DIR}"
     exit 1
 fi
-
+cd sudo su
 cd "${APP_DIR}"
 
 if [ ! -d ".git" ]; then
