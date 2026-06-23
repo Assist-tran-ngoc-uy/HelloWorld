@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euxo pipefail
+set -e
 
 APP_DIR="/var/www/html/HelloWorld"
 BRANCH="main"
@@ -9,37 +9,34 @@ exec > >(tee -a "${LOG_FILE}") 2>&1
 
 echo "========== DEPLOY START =========="
 date
-whoami
-pwd
+echo "User: $(whoami)"
+echo "App dir: ${APP_DIR}"
+echo "Branch: ${BRANCH}"
 
-echo "APP_DIR=${APP_DIR}"
-echo "BRANCH=${BRANCH}"
-
-if [ ! -d "${APP_DIR}/.git" ]; then
-    echo "ERROR: ${APP_DIR} is not a Git repository"
+if [ ! -d "${APP_DIR}" ]; then
+    echo "ERROR: App directory does not exist: ${APP_DIR}"
     exit 1
 fi
 
 cd "${APP_DIR}"
 
+if [ ! -d ".git" ]; then
+    echo "ERROR: ${APP_DIR} is not a Git repository"
+    exit 1
+fi
+
 echo "Remote:"
 git remote -v
 
 echo "Before pull:"
-git log --oneline --decorate -5
+git log --oneline --decorate -3 || true
 
-echo "Fetch latest code"
+echo "Pull latest code..."
 git fetch origin "${BRANCH}"
-
-echo "Reset working tree"
 git reset --hard "origin/${BRANCH}"
-git clean -fd
 
 echo "After pull:"
-git log --oneline --decorate -5
+git log --oneline --decorate -3
 
-echo "Restart Docker"
-docker compose down || true
-docker compose up -d --build
-
+echo "DEPLOY SUCCESS: code pulled successfully."
 echo "========== DEPLOY DONE =========="
