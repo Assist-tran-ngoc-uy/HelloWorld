@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 date_default_timezone_set('Asia/Tokyo');
 
-$message = 'Ngoc Uy VIP PRO 1111';
+$message = 'Ngoc Uy VIP PRO 123';
 $phpVersion = PHP_VERSION;
 $time = date('Y-m-d H:i:s');
 ?>
